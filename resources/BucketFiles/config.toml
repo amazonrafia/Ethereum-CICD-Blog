@@ -1,0 +1,10 @@
+rpc-http-enabled=true
+rpc-ws-enabled=true
+host-allowlist=["*"]
+rpc-http-cors-origins=["all"]
+logging="DEBUG"
+miner-enabled=true
+miner-coinbase="0000000000000000000000000000000000000000"
+revert-reason-enabled=true
+rpc-http-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","PRIV","PERM"]
+rpc-ws-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","PRIV","PERM"]

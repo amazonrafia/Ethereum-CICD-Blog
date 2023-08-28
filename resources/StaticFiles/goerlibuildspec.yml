@@ -1,0 +1,37 @@
+version: 0.2
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      nodejs: 14
+  build:
+    on-failure: ABORT
+    commands:
+      - cd $CODEBUILD_SRC_DIR/SmartContractCode
+      - apt install -y jq
+      - npm install --loglevel=error
+      - npm install --loglevel=error --save-dev hardhat@2.14.0
+      - npm install --loglevel=error --save-dev @nomicfoundation/hardhat-toolbox@2.0.2
+      - npm install --loglevel=error --save-dev @nomicfoundation/hardhat-network-helpers@1.0.8
+      - npm install --loglevel=error --save-dev @nomicfoundation/hardhat-chai-matchers@1.0.6
+      - npm install --loglevel=error --save-dev @nomiclabs/hardhat-ethers@2.2.3
+      - npm install --loglevel=error --save-dev chai@4.3.7
+      - npm install --loglevel=error --save-dev @nomiclabs/hardhat-etherscan@3.1.7
+      - npm install --loglevel=error --save-dev @typechain/ethers-v5@10.2.1
+      - npm install --loglevel=error --save-dev ethers@5.7.2
+      - npm install --loglevel=error --save-dev @typechain/hardhat@6.1.6
+      - npm install --loglevel=error --save-dev hardhat-gas-reporter@1.0.9
+      - npm install --loglevel=error --save-dev solidity-coverage@0.8.2
+      - npm install --loglevel=error --save-dev @ethersproject/abi@5.7.0
+      - npm install --loglevel=error --save-dev @ethersproject/providers@5.7.2
+      - npm install --loglevel=error --save-dev typechain@8.2.0
+      - aws s3 cp s3://amb-cicd-blog-s3bucket/deploy.js .
+      - aws s3 cp s3://amb-cicd-blog-s3bucket/hardhat.config.js .
+      - chmod +x deploy.js
+      - chmod +x hardhat.config.js
+      - npx hardhat compile
+      - CONTRACTSADDRESS=$(npx hardhat run --network goerliamb deploy.js)
+      - echo $CONTRACTSADDRESS > newContract.txt
+artifacts:
+  files:
+    - TestNetworkContract/*.zip
