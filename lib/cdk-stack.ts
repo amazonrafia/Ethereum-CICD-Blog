@@ -57,33 +57,53 @@ export class CdkStack extends cdk.Stack {
       allowAllOutbound: true,
       securityGroupName: "AMB-CICD-Blog-SecGroup"
     });
-    secGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(22), 'Allow SSH Access');
     secGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(8545), 'All Ethreum HTTP RPC Traffic');
     secGroup.addIngressRule(secGroup, ec2.Port.allTraffic(), 'Allow all traffic associated with this security group');
     let securityGroupArn=`arn:aws:ec2:${region}:${account}:security-group/${secGroup.securityGroupId}`;
 
     /************************ IAM Policies & Role ********************/
+    //DynamoDb Read/Write access for Lambda
+    let dynamoDBReadWritePolicy = new iam.ManagedPolicy(this, "AMB-CICD-Blog-DynamoDBReadWrite", {
+      managedPolicyName: "AMB-CICD-Blog-DynamoDBReadWrite",
+      statements: [new iam.PolicyStatement({
+        sid: "AMBCICDBlogPolicy1",
+        actions: [
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:PartiQLUpdate",
+          "dynamodb:Scan",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem",
+          "dynamodb:CreateTable",
+          "dynamodb:PartiQLSelect",
+          "dynamodb:DescribeTable",
+          "dynamodb:PartiQLInsert",
+          "dynamodb:GetItem",
+          "dynamodb:UpdateTable",
+          "dynamodb:GetRecords",
+          "dynamodb:PartiQLDelete"
+        ],
+        effect: iam.Effect.ALLOW,
+        resources: ["*"]
+      })]
+    });
 
     //SecretManagerReadAccess Policy
     let secReadPolicy = new iam.ManagedPolicy(this, "AMB-CICD-Blog-SecretMgrReadAccess", {
       managedPolicyName: "AMB-CICD-Blog-SecretMgrReadAccess",
       statements: [new iam.PolicyStatement({
-        sid: "AMBCICDBlogPolicy1",
+        sid: "AMBCICDBlogPolicy2",
         actions: ["secretsmanager:GetSecretValue"],
         effect: iam.Effect.ALLOW,
         resources: ["*"]
       })]
     });
 
-
-
-
-
     //codecommit access for lambda policy
     let gitLambdaAccessPolicy=new iam.ManagedPolicy(this, "AMB-CICD-Blog-GitLambdaAccessPolicy", {
       managedPolicyName: "AMB-CICD-Blog-GitLambdaAccessPolicy",
       statements: [new iam.PolicyStatement({
-        sid: "AMBCICDBlogPolicy2",
+        sid: "AMBCICDBlogPolicy3",
         actions: [
           "codecommit:GitPull",
           "codecommit:GetRepository"
@@ -97,7 +117,7 @@ export class CdkStack extends cdk.Stack {
       managedPolicyName: "AMB-CICD-Blog-CodeBuildSvcRolePolicy",
       statements: [
         new iam.PolicyStatement({
-          sid: "AMBCICDBlogPolicy3",
+          sid: "AMBCICDBlogPolicy4",
           actions: [
             "logs:CreateLogGroup",
             "logs:PutLogEvents",
@@ -213,30 +233,6 @@ export class CdkStack extends cdk.Stack {
       managedPolicies: [codeBuildSrvRolePol]
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //Besu-NodeContainerExecutionRole
     let besuECSExecRole = new iam.Role(this, "AMB-CICD-Blog-BesuECSExecRole", {
       roleName: "AMB-CICD-Blog-BesuECSExecRole",
@@ -255,8 +251,7 @@ export class CdkStack extends cdk.Stack {
       managedPolicies: [
         secReadPolicy,
         gitLambdaAccessPolicy,
-        iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonDynamoDBFullAccess"),
-        iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess"),
+        dynamoDBReadWritePolicy,
         iam.ManagedPolicy.fromAwsManagedPolicyName("service-role/AWSLambdaBasicExecutionRole")
       ]
     });
@@ -626,7 +621,9 @@ export class CdkStack extends cdk.Stack {
       environment:{"DYNAMODB_NAME":ShareToWinDevDB.tableName,"NETWORK_ENDPOINT":besuNodePublicIp,"CONTRACTADDRESS":"ToBeEntered","NODE_OPTIONS":"--experimental-fetch","SECRET_MGR_STR":secMgrSecrets.secretName},
       functionName: "AMB-CICD-Blog-ShareToWinLambda",
       paramsAndSecrets:lambda.ParamsAndSecretsLayerVersion.fromVersion(lambda.ParamsAndSecretsVersions.V1_0_103),
-      layers:[ShareToWinLambdaLayer]
+      layers:[ShareToWinLambdaLayer],
+      role:lambdaExecRole,
+      timeout: cdk.Duration.seconds(180),
     });
     appLambdaShareToWinFunc.node.addDependency(ShareToWinLambdaLayer);
 
@@ -800,5 +797,6 @@ export class CdkStack extends cdk.Stack {
       artifactBucket: cicdBucket,
       role:codePipelineSvcRole
     });
+    codePipelineDev.node.addDependency(appLambdaShareToWinFunc);
   }
 }

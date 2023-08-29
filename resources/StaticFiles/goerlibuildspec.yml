@@ -31,7 +31,10 @@ phases:
       - chmod +x hardhat.config.js
       - npx hardhat compile
       - CONTRACTSADDRESS=$(npx hardhat run --network goerliamb deploy.js)
+      - cd .. && mkdir contract-build && cd contract-build
+      - cp ../SmartContractCode/artifacts/contracts/AssetToken.sol/AssetToken.json .
       - echo $CONTRACTSADDRESS > newContract.txt
+      - zip -r deployedContract.zip .
 artifacts:
   files:
-    - TestNetworkContract/*.zip
+    - contract-build/*.zip
