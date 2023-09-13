@@ -65,7 +65,7 @@ let secMgrSecrets=new secretsmanager.Secret(this, "AMB-CICD-Blog-Secrets", {
 
 6. Go to `dev.json` file under `CDK\resources\BucketFiles\dev.json` and change all the public key with the public keys generated in step 3. E.g in the below code snippet "bc477F8Aa5BDdF2cAB1216Dd3B341718DeC3af6F" is the public key of the first account, "1e6EF65FE43715a509b1947630e33910247660D2" is the key of the second account and so on. 
 
-:::
+```
 "alloc": {
       "bc477F8Aa5BDdF2cAB1216Dd3B341718DeC3af6F": {
         "balance": "0xad78ebc5ac6200000"
@@ -77,7 +77,7 @@ let secMgrSecrets=new secretsmanager.Secret(this, "AMB-CICD-Blog-Secrets", {
       .
       .
     }
-:::
+```
 
 ## Deploy CDK
 
