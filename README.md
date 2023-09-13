@@ -22,7 +22,8 @@ cdk bootstrap aws://ACCOUNT-NUMBER/REGION
 ```
 ## Generate a random mnemonic and update Besu Genesis file and cdk-stack.ts file (optional step)
 The repository is already configured with a default mnemonic to be used with Hyperledger Besu network. 
-** Do not use these mnemonic with with any Testnet or Mainnet **
+
+**Do not use these mnemonic with with any Testnet or Mainnet**
 
 If you wish to change this default mnemonic with a new randomly generated mnemonic then follow these steps. 
 
