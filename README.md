@@ -45,8 +45,8 @@ cd ../CDK/lib
 ```
 open the file and look for secrets manager construct shown below:
 
-:::
- let secMgrSecrets=new secretsmanager.Secret(this, "AMB-CICD-Blog-Secrets", {
+```console
+let secMgrSecrets=new secretsmanager.Secret(this, "AMB-CICD-Blog-Secrets", {
       secretName: "AMB-CICD-Blog-Secrets",
       description: "Captures all the secrets required by CodeBuild and ShareToWinLambda",
       removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -59,7 +59,7 @@ open the file and look for secrets manager construct shown below:
         "/CodeBuild/BillingTokenUrl":cdk.SecretValue.unsafePlainText("To be entered"),
       }
     });
-:::
+```
 
 5. Change the test accounts that get created when Besu node starts by entering the public keys of the accounts generated in step 3
 
