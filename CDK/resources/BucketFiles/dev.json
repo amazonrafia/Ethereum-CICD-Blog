@@ -12,53 +12,33 @@
     "difficulty": "0x10000",
     "alloc": {
       "bc477F8Aa5BDdF2cAB1216Dd3B341718DeC3af6F": {
-        "privateKey": "786d8bc43733c93482d5ec21188f2646d8d56f6d646eaa072faaf89ba1f41765",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "1e6EF65FE43715a509b1947630e33910247660D2": {
-        "privateKey": "95318133060e4fe8f29e59bfd30038c2bd6b82e1c4744324377a11c0440eeb2a",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "f352aebb355169925AB4F132BA77f98876cac36D": {
-        "privateKey": "3cd1fb7904f5c9166c49724feb4fa0531d8b8c5ba2822c38e3651ae0b9bb6492",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "8b3738e553439eb88e7B0DdD3d5FBdE4305Ea96D": {
-        "privateKey": "bc515f2b20ce61245eee1d3d0d11a76e013b14c8e0c7cfa42359529cc1bba785",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "62845D3F43942Fb141BCAf66b3C4eC79Cc5D3950": {
-        "privateKey": "cc0366d8f009ea468bee61103b4209ae38c3d3fcd35bb6d57b4b9be25cb2fc11",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "5d1Cf9619C109d4521f98C82A772CdC18E8BDa1c": {
-        "privateKey": "a0dd72b54edc2f768e797678822440077fab59b8fb0d9cf2a2362bcd9e1bf781",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "543506d1f2b456E7000b7459345f06CA67baf2f1": {
-        "privateKey": "f7fda088db550a9c71000433186cbe36db90e10cb06904ce10fe324ca66d1f5d",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "AD24eFBC15Fb2846E5a423a886539E4eA4Ee4220": {
-        "privateKey": "e1ebe7d93ce1140b3d4c1a68a1abff62970ba85787fe30479c4f3968017d2ae3",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "36eb4EDD026027Ff052C42c904B4a6cD56076E99": {
-        "privateKey": "7be41b857c2b8de2463a942cc4a05d26471aefc3ba14f232db23aa3fa52c4754",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       },
       "569519A3C71CC3428a8a5B402A568430609E3e03": {
-        "privateKey": "21b9cf14ab4cc82438d3cdeef9754951245de6982a065a0e8c34f4c5c01fa2af",
-        "comment": "private key and this comment are ignored.  In a real chain, the private key should NOT be stored",
         "balance": "0xad78ebc5ac6200000"
       }
     }
