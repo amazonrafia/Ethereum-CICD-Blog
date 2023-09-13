@@ -20,7 +20,7 @@ npm uninstall -g cdk
 npm install -g aws-cdk
 cdk bootstrap aws://ACCOUNT-NUMBER/REGION 
 ```
-## Generate a random mnemonic and update Besu Genesis file and cdk.ts file (optional step)
+## Generate a random mnemonic and update Besu Genesis file and cdk-stack.ts file (optional step)
 The repository is already configured with a default mnemonic to be used with Hyperledger Besu network. 
 ** Do not use these mnemonic with with any Testnet or Mainnet **
 
