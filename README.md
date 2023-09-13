@@ -43,8 +43,9 @@ node index.mjs
 ```console
 cd ../CDK/lib
 ```
-open the file and look for secrets manager construct shown below
-...
+open the file and look for secrets manager construct shown below:
+
+:::
  let secMgrSecrets=new secretsmanager.Secret(this, "AMB-CICD-Blog-Secrets", {
       secretName: "AMB-CICD-Blog-Secrets",
       description: "Captures all the secrets required by CodeBuild and ShareToWinLambda",
@@ -58,12 +59,13 @@ open the file and look for secrets manager construct shown below
         "/CodeBuild/BillingTokenUrl":cdk.SecretValue.unsafePlainText("To be entered"),
       }
     });
-...
+:::
+
 5. Change the test accounts that get created when Besu node starts by entering the public keys of the accounts generated in step 3
 
 6. Go to `dev.json` file under `CDK\resources\BucketFiles\dev.json` and change all the public key with the public keys generated in step 3. E.g in the below code snippet "bc477F8Aa5BDdF2cAB1216Dd3B341718DeC3af6F" is the public key of the first account, "1e6EF65FE43715a509b1947630e33910247660D2" is the key of the second account and so on. 
 
-```
+:::
 "alloc": {
       "bc477F8Aa5BDdF2cAB1216Dd3B341718DeC3af6F": {
         "balance": "0xad78ebc5ac6200000"
@@ -75,7 +77,8 @@ open the file and look for secrets manager construct shown below
       .
       .
     }
-``` 
+:::
+
 ## Deploy CDK
 
 1. Clone this repository to get the cdk stack locally on your computer
