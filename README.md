@@ -63,7 +63,9 @@ let secMgrSecrets=new secretsmanager.Secret(this, "AMB-CICD-Blog-Secrets", {
 
 5. Change the test accounts that get created when Besu node starts by entering the public keys of the accounts generated in step 3
 
-6. Go to `dev.json` file under `CDK\resources\BucketFiles\dev.json` and change all the public key with the public keys generated in step 3. E.g in the below code snippet "bc477F8Aa5BDdF2cAB1216Dd3B341718DeC3af6F" is the public key of the first account, "1e6EF65FE43715a509b1947630e33910247660D2" is the key of the second account and so on. 
+6. Go to `dev.json` file under `CDK\resources\BucketFiles\dev.json` and change all the public key with the public keys generated in step 3. 
+
+E.g in the below code snippet "bc477F8Aa5BDdF2cAB1216Dd3B341718DeC3af6F" is the public key of the first account, "1e6EF65FE43715a509b1947630e33910247660D2" is the key of the second account and so on. 
 
 ```
 "alloc": {
